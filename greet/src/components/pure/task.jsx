@@ -4,7 +4,7 @@ import { Task } from '../../models/task_class'
 import { useEffect } from 'react'
 import { LEVELS } from '../../models/levels_num'
 
-const TaskItem = ({task}) => {
+const TaskItem = ({ task, complete, remove }) => {
 
   useEffect(()=>{
     console.log('Created Task')
@@ -46,9 +46,9 @@ const TaskItem = ({task}) => {
 
   function completedTask(){
     if(task.completed){
-      return (<i className='bi-toggle-on' style ={{color: 'green', fontWeight: 'bold'}}>completed</i>)
+      return (<i className='bi-toggle-on'  onClick={() => complete(task)}  style ={{color: 'green', fontWeight: 'bold'}}>completed</i>)
     } else {
-      return (<i className='bi-toggle-off'  style ={{color: 'grey', fontWeight: 'bold'}}>pending</i>)
+      return (<i className='bi-toggle-off'  onClick={() => complete(task)} style ={{color: 'grey', fontWeight: 'bold'}}>pending</i>)
     }
   }
 
@@ -68,14 +68,16 @@ const TaskItem = ({task}) => {
       </td>
       <td className='align-middle'>
         {completedTask()}
-        <i className='bi-trash' style={{color:'tomato'}}></i>
+        <i className='bi-trash' onClick={()=> remove(task)} style={{color:'tomato'}}></i>
       </td>
     </tr>
   )
 }
 
 TaskItem.propTypes = {
-    task: PropTypes.instanceOf(Task)
+    task: PropTypes.instanceOf(Task).isRequired,
+    complete: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired
 }
 
 export default TaskItem

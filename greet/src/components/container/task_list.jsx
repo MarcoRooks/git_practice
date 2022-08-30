@@ -22,8 +22,28 @@ const TaskList = () => {
     }, [tasks])
 
 
-    const changeCompleted = (id) =>{
-        console.log('to-do: change state of a task')
+    function completeTask(task){
+        console.log('complete this task:', task);
+        const index = tasks.indexOf(task)
+        let newTasks = [...tasks];
+        newTasks[index].completed = !newTasks[index].completed
+        setTasks(newTasks)
+    }
+
+    function deleteTask (task){
+        console.log('delete this task:', task);
+        const index = tasks.indexOf(task)
+        let newTasks = [...tasks];
+        newTasks.splice(index, 1);
+        setTasks(newTasks)
+    }
+
+    function addTask(task){
+        console.log('add this task:', task);
+        const index = tasks.indexOf(task)
+        let newTasks = [...tasks];
+        newTasks.push(task);
+        setTasks(newTasks)
     }
 
     return (
@@ -47,14 +67,14 @@ const TaskList = () => {
                             <tbody>
                                 {/* TO-DO apply a forEach/mapping to renderize each TaskItem compoenent */}
                                 {tasks.map( (task, index) => {
-                                    return (<TaskItem key={index} task={task}/>)
+                                    return (<TaskItem key={index} task={task} complete={completeTask} remove={deleteTask} />)
                                 })}
                             </tbody>
                         </table>
                     </div>
-                    <TaskForm/>
                 </div>
             </div>
+            <TaskForm add={addTask}/>
         </div>
     )
 }
