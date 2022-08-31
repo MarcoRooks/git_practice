@@ -11,6 +11,7 @@ function ContactItem({user, connected, add, remove}) {
       return (<i className='bi-toggle-off'  onClick={() => connected(user)} style ={{color: 'grey', fontWeight: 'bold'}}>pending</i>)
     }
   }
+  
   return (
     <div>
         <h1> name: {user.name}</h1>
