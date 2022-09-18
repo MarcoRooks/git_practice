@@ -15,7 +15,10 @@ const TaskList = () => {
 
     useEffect(() => {
         console.log('Task State has been modified')
-        setLoading(false)
+        setTimeout(() => {
+            setLoading(false)
+        }, 2000)
+        
         return () => {
             console.log('Task list is going to unmount')
         }
@@ -46,6 +49,39 @@ const TaskList = () => {
         setTasks(newTasks)
     }
 
+    const Table = () => {
+        return (
+            <table>
+                <thead>
+                    <tr>
+                    <th scope='col'>Title</th>
+                    <th scope='col'>Description</th>
+                    <th scope='col'>Priority</th>
+                    <th scope='col'>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {/* TO-DO apply a forEach/mapping to renderize each TaskItem compoenent */}
+                    {tasks.map( (task, index) => {
+                        return (<TaskItem key={index} task={task} complete={completeTask} remove={deleteTask} />)
+                    })}
+                </tbody>
+            </table>
+        )
+    } 
+    let taskTable;
+
+    if(tasks.length > 0){
+        taskTable = <Table/>
+    } else{
+        taskTable = (
+            <div>
+                <h3>Please introduce new tasks</h3>
+                <h4>no elements available</h4>
+            </div>
+            ) 
+    }
+
     return (
         <div>
             <div className='col-12'>
@@ -55,26 +91,11 @@ const TaskList = () => {
                         <h5>Your tasks:</h5>
                     </div>
                     <div className='card-body' data-mdb-perfect-scrollbar = 'true' style={{position:'relative', height: '400px'}}>
-                        <table>
-                            <thead>
-                                <tr>
-                                <th scope='col'>Title</th>
-                                <th scope='col'>Description</th>
-                                <th scope='col'>Priority</th>
-                                <th scope='col'>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* TO-DO apply a forEach/mapping to renderize each TaskItem compoenent */}
-                                {tasks.map( (task, index) => {
-                                    return (<TaskItem key={index} task={task} complete={completeTask} remove={deleteTask} />)
-                                })}
-                            </tbody>
-                        </table>
+                        {loading ? (<p>Loading Tasklist</p>) : taskTable}
                     </div>
                 </div>
             </div>
-            <TaskForm add={addTask}/>
+            <TaskForm add={addTask} length={tasks.length}/>
         </div>
     )
 }

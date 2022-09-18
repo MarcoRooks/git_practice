@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Task } from '../../models/task_class'
 import { useEffect } from 'react'
 import { LEVELS } from '../../models/levels_num'
+import '../../styles/task.scss'
 
 const TaskItem = ({ task, complete, remove }) => {
 
@@ -52,8 +53,23 @@ const TaskItem = ({ task, complete, remove }) => {
     }
   }
 
+  const taskCompleted = {
+    backgroudColor: 'tomato',
+    color: 'green',
+    fontWeight: 'bold',
+    textDecoration: 'line-through'
+  }
+
+  const taskPending = {
+    fontWeight: 'bold',
+    color: 'tomato'
+  }
+
+
+
   return (
-    <tr>
+    /*<tr className={task.completed? 'task-completed' : 'task-pending'}></tr>*/
+    <tr className='fw-normal' style={task.completed? taskCompleted : taskPending}>
       <th>
         <span className='ms-2'>
           {task.name}
