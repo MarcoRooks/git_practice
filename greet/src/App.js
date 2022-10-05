@@ -2,6 +2,7 @@ import './App.css';
 import TaskList from './components/container/task_list';
 import Father from './components/practice/father';
 import AsyncExample from './components/pure/AsyncExample';
+import AxiosCRUDExample from './components/pure/AxiosCRUDExample';
 import AxiosExample from './components/pure/AxiosExample';
 import FetchExamples from './components/pure/forms/FetchExamples';
 import LoginFormiK from './components/pure/forms/loginFormiK';
@@ -18,7 +19,8 @@ function App() {
       {/*<AsyncExample/>*/}
       {/*<ObservableExample/>*/}
       {/*<FetchExamples/>*/}
-      <AxiosExample/>
+      {/*<AxiosExample/>*/}
+      <AxiosCRUDExample/>
     </div>
   );
 }

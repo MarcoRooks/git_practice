@@ -12,7 +12,7 @@ const AxiosExample = () => {
         getData()
             .then((response) => {
                 console.log('This what you asked for', response)
-                setUser(response.data)
+                setUser(response.data.results[0])
             })
             .catch((error) =>{
                 alert(`What is the matttaaa ${error}`)
@@ -30,14 +30,11 @@ const AxiosExample = () => {
                         <h3>{user.email} </h3>
                     </div>
                 ) 
-                :
-                (
-                    <div>
-                        <h2>random user generator:</h2>
-                        <button onClick={()=>obtainNewUser()}>generate new user</button>
-                    </div>
-                )
-            }
+                : null}
+                <div>
+                    <h2>random user generator:</h2>
+                    <button onClick={()=>obtainNewUser()}>generate new user</button>
+                </div>
         </div>
     );
 };
